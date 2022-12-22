@@ -15,7 +15,7 @@ import { CreateTodoDto, UpdateTodoDto } from './dto';
 import { FindTodoParam } from './dto/find-todo-param.dto';
 
 @ApiTags('TODO')
-@Controller()
+@Controller('todo')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
