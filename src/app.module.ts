@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import * as toJson from '@meanie/mongoose-to-json';
 
@@ -8,26 +7,18 @@ import { Connection } from 'mongoose';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { Todo, TodoSchema } from './todo.schema';
-import { validationSchema } from './config/config.validator';
+
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/todo'; // TODO Find a way to set process.env.MONGO_URI for deployment (Docker + GitHub)
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      cache: true,
-      validationSchema: validationSchema,
-      validationOptions: {
-        abortEarly: true,
-      },
-    }),
     MongooseModule.forRootAsync({
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_URI'),
+      useFactory: async () => ({
+        uri: mongoUri,
         connectionFactory: (connection: Connection) => {
           return connection.plugin(toJson);
         },
       }),
-      inject: [ConfigService],
     }),
     MongooseModule.forFeature([{ name: Todo.name, schema: TodoSchema }]),
   ],
