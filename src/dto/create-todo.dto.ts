@@ -1,6 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsNotEmpty, IsNumber, IsString, Max, Min } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class CreateTodoDto {
   @IsString()
@@ -14,7 +21,7 @@ export class CreateTodoDto {
   content: string;
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   @Min(1)
   @Max(10)
   @ApiProperty()

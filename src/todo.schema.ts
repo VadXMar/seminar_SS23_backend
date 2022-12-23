@@ -12,7 +12,7 @@ export class Todo {
   @Prop({ required: true, trim: true })
   content: string;
 
-  @Prop({ required: true, min: 1, max: 10 })
+  @Prop({ min: 1, max: 10 })
   priority: number;
 
   @Prop({ required: true, default: false })
