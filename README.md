@@ -25,6 +25,9 @@ $ npm run start:prod
 The application requires a Mongo-Database running on the system on port 27017.
 For this an installation of `Docker Desktop` is recommended where the latest mongodb image can be pulled.
 
+## Swagger
+After starting the application a Swagger documentation is available at http://localhost:3000/api/v1
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
