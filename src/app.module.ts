@@ -8,15 +8,13 @@ import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { Todo, TodoSchema } from './todo.schema';
 
-//const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/todo'; // TODO Find a way to set process.env.MONGO_URI for deployment (Docker + GitHub)
-const mongoUri = 'mongodb+srv://cyclicTest:<rpLWSIX2LDp7eE1D>@cluster0.zwzj7ei.mongodb.net/';
+const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/todo'; // TODO Find a way to set process.env.MONGO_URI for deployment (Docker + GitHub)
 
 @Module({
   imports: [
     MongooseModule.forRootAsync({
       useFactory: async () => ({
         uri: mongoUri,
-        //uri: process.env.MONGO_URI,
         connectionFactory: (connection: Connection) => {
           return connection.plugin(toJson);
         },
